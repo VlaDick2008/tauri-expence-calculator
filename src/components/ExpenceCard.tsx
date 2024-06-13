@@ -1,3 +1,4 @@
+import React from 'react';
 import type { IExpence } from '../App';
 
 export default function ExpenceCard({
@@ -11,6 +12,8 @@ export default function ExpenceCard({
   id: string;
   setNewExpences: React.Dispatch<React.SetStateAction<IExpence[]>>;
 }) {
+  const [isCompleted, setIsCompleted] = React.useState(false);
+
   const expences = JSON.parse(localStorage.getItem('expences') || '[]');
 
   const deleteExpence = () => {
@@ -18,16 +21,25 @@ export default function ExpenceCard({
   };
 
   return (
-    <div className="border flex justify-between items-center border-slate-900 p-3 rounded">
+    <div
+      className={`border flex justify-between items-center p-3 rounded ${
+        isCompleted ? 'border-green-600 bg-green-200 text-slate-600' : 'border-slate-900'
+      }`}>
       <div>
         <h3 className="text-xl">{title}</h3>
         <p>{value} p.</p>
       </div>
-      <button
-        onClick={deleteExpence}
-        className="border text-white font-bold bg-red-600 border-red-700 p-3 rounded">
-        Удалить
-      </button>
+      <div className="flex gap-4 items-center">
+        <label className="flex gap-2 text-sm">
+          Отметить выполненным?
+          <input type="checkbox" onClick={() => setIsCompleted(!isCompleted)} />
+        </label>
+        <button
+          onClick={deleteExpence}
+          className="border text-white font-bold bg-red-600 border-red-700 p-3 rounded">
+          Удалить
+        </button>
+      </div>
     </div>
   );
 }
