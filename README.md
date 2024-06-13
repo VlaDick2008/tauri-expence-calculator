@@ -1,7 +1,4 @@
-# Tauri + React + Typescript
+# Калькулятор расходов на React + Tauri
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+Это небольшое приложение изначально было написано как веб приложение на React, а затем перенесено на Tauri. Работает с ипользованием localStorage. Позволяет создавать карточки расходов и отсчитывать процент от дохода, который нужно отложить.
+Делал сугубо для себя, но может кто-то найдёт полезным.
