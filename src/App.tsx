@@ -1,11 +1,12 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import ExpenceCard from './components/ExpenceCard';
 import IncomeCard from './components/IncomeCard';
 import LeftoverCard from './components/LeftoverCard';
 
 export interface IExpence {
-  id: number;
+  id: string;
   title: string;
   value: number;
 }
@@ -34,7 +35,7 @@ function App() {
     if (newExpence.title === '') return;
 
     const newExpenceObj: IExpence = {
-      id: Date.now(),
+      id: uuid(),
       title: newExpence.title,
       value: newExpence.value,
     };
@@ -44,7 +45,7 @@ function App() {
   };
 
   return (
-    <section className="bg-white rounded-lg h-full flex gap-5 p-5">
+    <section className="bg-white rounded-lg h-full flex flex-col xl:flex-row gap-5 p-5">
       <div className="flex flex-col gap-5 flex-wrap flex-1">
         {newExpences.map((expence: IExpence) => (
           <ExpenceCard
@@ -89,7 +90,7 @@ function App() {
           </button>
         </div>
       </div>
-      <div className="h-full w-[1px] bg-black" />
+      <div className="xl:h-full h-[1px] xl:w-[1px] w-full bg-black" />
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-5">
           <IncomeCard setMoney={setAvans} value={avans} title="Аванс" />
@@ -99,24 +100,30 @@ function App() {
           <LeftoverCard setLeftoverPersent={setLeftoverPersent} />
         </div>
         <div>
-          <div className="flex flex-col">
-            <h3 className="text-3xl">Деняк: </h3>
-            <p className="text-xl">{totalMoney} p.</p>
-            <h3 className="text-3xl">Расходы:</h3>
-            <p className="text-xl">{totalExpences} p.</p>
-            <h2 className="text-5xl">
-              Нужно отложить: {(((totalMoney - totalExpences) / 100) * leftoverPersent).toFixed(0)}{' '}
-              p.
-            </h2>
-            <h2 className="text-5xl">
-              Деняк остаётся:{' '}
-              {(
-                totalMoney -
-                totalExpences -
-                ((totalMoney - totalExpences) / 100) * leftoverPersent
-              ).toFixed(0)}{' '}
-              p.
-            </h2>
+          <div className="flex xl:flex-col gap-4">
+            <div className="border border-slate-900 p-3 rounded">
+              <h3 className="text-3xl">Деняк: </h3>
+              <p className="text-xl">{totalMoney} p.</p>
+            </div>
+            <div className="border border-slate-900 p-3 rounded">
+              <h3 className="text-3xl">Расходы:</h3>
+              <p className="text-xl">{totalExpences} p.</p>
+            </div>
+            <div className="border border-slate-900 p-3 rounded">
+              <h2 className="xl:text-5xl text-3xl">
+                Нужно отложить:{' '}
+                {(((totalMoney - totalExpences) / 100) * leftoverPersent).toFixed(0)} p.
+              </h2>
+              <h2 className="xl:text-5xl text-3xl">
+                Деняк остаётся:{' '}
+                {(
+                  totalMoney -
+                  totalExpences -
+                  ((totalMoney - totalExpences) / 100) * leftoverPersent
+                ).toFixed(0)}{' '}
+                p.
+              </h2>
+            </div>
           </div>
         </div>
       </div>

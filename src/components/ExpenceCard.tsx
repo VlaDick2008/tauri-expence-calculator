@@ -8,7 +8,7 @@ export default function ExpenceCard({
 }: {
   title: string;
   value: number;
-  id: number;
+  id: string;
   setNewExpences: React.Dispatch<React.SetStateAction<IExpence[]>>;
 }) {
   const expences = JSON.parse(localStorage.getItem('expences') || '[]');
